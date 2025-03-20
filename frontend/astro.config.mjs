@@ -26,7 +26,7 @@ export default defineConfig({
   ],
   vite: {
     optimizeDeps: {
-      include: ["gsap", "@gsap/react"],
+      include: ["gsap", "@gsap/react", "react", "react-dom"],
     },
     build: {
       commonjsOptions: {
