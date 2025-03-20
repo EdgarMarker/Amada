@@ -26,16 +26,12 @@ export default defineConfig({
   ],
   vite: {
     optimizeDeps: {
-      include: ['gsap', 'gsap/ScrollTrigger', 'gsap/ScrollSmoother', 'gsap/ScrollToPlugin']
+      include: ["gsap", "@gsap/react"],
     },
     build: {
-      rollupOptions: {
-        output: {
-          manualChunks: {
-            gsap: ['gsap', 'gsap/ScrollTrigger', 'gsap/ScrollSmoother', 'gsap/ScrollToPlugin']
-          }
-        }
-      }
-    }
-  }
+      commonjsOptions: {
+        include: [/gsap/, /@gsap/],
+      },
+    },
+  },
 });
