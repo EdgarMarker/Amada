@@ -2,8 +2,12 @@ import { defineConfig } from "astro/config";
 import sanity from "@sanity/astro";
 import react from "@astrojs/react";
 import path from "path";
+import { fileURLToPath } from "url"; // Importa fileURLToPath
 
 const { VITE_SANITY_PROJECT_ID, VITE_SANITY_DATASET } = import.meta.env;
+
+// Convierte import.meta.url a una ruta de archivo
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 export default defineConfig({
   image: {

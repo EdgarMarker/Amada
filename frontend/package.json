@@ -18,7 +18,7 @@
     "@sanity/visual-editing": "^2.12.12",
     "@splidejs/react-splide": "^0.7.12",
     "@splidejs/splide": "^4.1.4",
-    "@types/react": "^19.0.12",
+    "@types/react": "^18.2.0",
     "@types/react-dom": "^19.0.4",
     "astro": "^5.5.3",
     "gsap": "file:gsap-bonus.tgz",
