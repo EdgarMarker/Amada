@@ -1,7 +1,6 @@
 import { gsap } from "gsap";
 import { useGSAP } from "@gsap/react";
-import pkg from 'gsap/ScrollSmoother.js';
-const { ScrollSmoother } = pkg;
+import { ScrollSmoother } from "gsap/ScrollSmoother";
 import ScrollToPlugin from "gsap/ScrollToPlugin";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
