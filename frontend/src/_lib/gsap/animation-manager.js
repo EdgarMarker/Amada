@@ -1,24 +1,12 @@
 // animation-manager.js
 import { gsap } from "gsap";
-
-// Importación de ScrollTrigger como CommonJS
-import pkgScrollTrigger from 'gsap/ScrollTrigger.js';
-const { ScrollTrigger } = pkgScrollTrigger;
-
-// Importación de ScrollSmoother como CommonJS
-import pkgScrollSmoother from 'gsap/ScrollSmoother.js';
-const { ScrollSmoother } = pkgScrollSmoother;
-
-// Importación de ScrollToPlugin como CommonJS
-import pkgScrollToPlugin from 'gsap/ScrollToPlugin.js';
-const { ScrollToPlugin } = pkgScrollToPlugin;
-
-// Importar useGSAP directamente (ES Module)
-import { useGSAP } from "@gsap/react";  // Sin "default"
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { ScrollSmoother } from "gsap/ScrollSmoother";
+import ScrollToPlugin from "gsap/ScrollToPlugin";
+import { useGSAP } from "@gsap/react";
 
 // Registrar plugins
 gsap.registerPlugin(ScrollTrigger, ScrollToPlugin, ScrollSmoother, useGSAP);
-
 
 //Exportar useGSAP
 
