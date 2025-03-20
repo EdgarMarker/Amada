@@ -6,9 +6,6 @@ import { fileURLToPath } from "url"; // Importa fileURLToPath
 
 const { VITE_SANITY_PROJECT_ID, VITE_SANITY_DATASET } = import.meta.env;
 
-// Convierte import.meta.url a una ruta de archivo
-const __dirname = path.dirname(fileURLToPath(import.meta.url));
-
 export default defineConfig({
   image: {
     remotePatterns: [
@@ -27,20 +24,4 @@ export default defineConfig({
     }),
     react(),
   ],
-  vite: {
-    resolve: {
-      alias: {
-        react: path.resolve(__dirname, "./node_modules/react"),
-        "react-dom": path.resolve(__dirname, "./node_modules/react-dom"),
-      },
-    },
-    optimizeDeps: {
-      include: ["gsap", "@gsap/react", "react", "react-dom"],
-    },
-    build: {
-      commonjsOptions: {
-        include: [/gsap/, /@gsap/],
-      },
-    },
-  },
 });
