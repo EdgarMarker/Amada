@@ -1,7 +1,8 @@
 // animation-manager.js
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { ScrollSmoother } from "gsap/ScrollSmoother";
+import pkg from 'gsap/ScrollSmoother.js';
+const { ScrollSmoother } = pkg;
 import ScrollToPlugin from "gsap/ScrollToPlugin";
 import { useGSAP } from "@gsap/react";
 
