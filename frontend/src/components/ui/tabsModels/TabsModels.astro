@@ -1,0 +1,91 @@
+---
+import { Picture } from "astro:assets";
+import type { Page } from "../../../_types/page";
+import PortableTextCustom from "../portableText/PortableTextCustom";
+
+const { dataPage } = Astro.props;
+const data: Page = dataPage;
+---
+
+<div class="column__1">
+  <ul
+    class="splide__pagination__tabs splide__pagination--ltr"
+    role="list"
+    aria-label="Select a slide to show"
+  >
+    {
+      data.models.list.map((model, idx) => (
+        <li role="presentation">
+          <button
+            class="splide__pagination__tab btn btn__tab"
+            type="button"
+            data-index={idx}
+            onclick={`window.splideModels.go(${idx})`}
+          >
+            {model.modelType}
+          </button>
+        </li>
+      ))
+    }
+  </ul>
+  <div class="splide splide-models">
+    <div class="splide__track" role="list">
+      <ul class="splide__list" role="list">
+        {
+          data.models.list.map((model) => (
+            <li class="column__2 splide__slide fadeInOut">
+              <div class="col__left ">
+                <h3>{model.name}</h3>
+                <PortableTextCustom
+                  data={model.techSheet1}
+                  client:only="react"
+                />
+                <hr />
+                <PortableTextCustom
+                  data={model.techSheet2}
+                  client:only="react"
+                />
+                <hr />
+                <PortableTextCustom
+                  data={model.techSheet3}
+                  client:only="react"
+                />
+              </div>
+              <div class="col__right">
+                <div class="splide splide-models--gallery" role="group">
+                  <div class="splide__track">
+                    <ul class="splide__list">
+                      {model.gallery.map((item) => (
+                        <li class="splide__slide">
+                          <Picture
+                            class="img"
+                            src={item.media.url}
+                            alt={item.alt.altText}
+                            formats={["webp", "avif", "jpg"]}
+                            fallbackFormat="jpg"
+                            inferSize={true}
+                            quality={"high"}
+                            densities={[1.5, 2]}
+                          />
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </div>
+</div>
+
+<style>
+  .splide__pagination {
+    li {
+      width: fit-content;
+      text-wrap: nowrap;
+    }
+  }
+</style>

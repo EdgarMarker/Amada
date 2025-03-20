@@ -1,0 +1,482 @@
+---
+import "../styles/page.css";
+import { Picture } from "astro:assets";
+import { getDataCompany } from "../_data/company";
+import { getDataPageMain } from "../_data/page";
+import ScrollSmootherProvider from "../_lib/gsap/ScrollSmootherProvider";
+import type { Company } from "../_types/company";
+import type { Page } from "../_types/page";
+import Nav from "../components/nav/Nav.astro";
+import Layout from "../layouts/Layout.astro";
+import PortableTextCustom from "../components/ui/portableText/PortableTextCustom";
+import LightBox from "../components/ui/lightbox/LightBox";
+import Footer from "../components/footer/Footer.astro";
+import ScrollTo from "../components/ui/btn/ScrollTo";
+import FormModal from "../components/ui/modal/FormModal.astro";
+import OpenModalBtn from "../components/ui/btn/OpenModalBtn";
+import Divisor from "../components/divisor/Divisor";
+import SvgText from "../components/ui/svgText/SvgText";
+import SplideSUS from "../components/ui/splide/SplideSUS";
+import SplideTabs from "../components/ui/splide/SplideTabs";
+
+const dataPage: Page = await getDataPageMain();
+const dataCompany: Company = await getDataCompany();
+---
+
+<Layout
+  title={dataPage.seo.title}
+  desc={dataPage.seo.dsc}
+  keywords={dataPage.seo.keywords}
+>
+  <Nav dataNav={dataPage} />
+  <ScrollSmootherProvider client:idle>
+    {
+      dataPage.hero.setActive && (
+        <section id={dataPage.hero.nameNav} class="hero">
+          <div class="column__1">
+            <div class="hero__iconBox">
+              <Picture
+                class="img hero__icon"
+                src={dataPage.hero.icon.media.url}
+                alt={dataPage.hero.icon.alt.altText}
+                formats={["webp", "avif"]}
+                fallbackFormat="jpeg"
+                inferSize={true}
+                quality={"high"}
+                densities={[1.5, 2]}
+              />
+            </div>
+            <div class="hero__svgAndH1Box">
+              <h1>{dataPage.hero.h1}</h1>
+              <Picture
+                class="img hero__svgText"
+                src={dataPage.hero.svgText.media.url}
+                alt={dataPage.hero.svgText.alt.altText}
+                formats={["webp", "avif"]}
+                fallbackFormat="jpeg"
+                inferSize={true}
+                quality={"high"}
+                densities={[1.5, 2]}
+              />
+            </div>
+            <Picture
+              class="img hero__imgMain"
+              src={dataPage.hero.imgMain.media.url}
+              alt={dataPage.hero.imgMain.alt.altText}
+              formats={["webp", "avif"]}
+              fallbackFormat="jpeg"
+              inferSize={true}
+              quality={"high"}
+              densities={[1.5, 2]}
+            />
+            <div class="hero__watermark">{dataCompany.watermark}</div>
+          </div>
+          <div class="column__1">
+            <PortableTextCustom
+              id="heroH2"
+              data={dataPage.hero.portableText}
+              client:idle
+            />
+            <div class="hero__imgSecondaryBox imageWatermarkBox">
+              <Picture
+                class="img"
+                src={dataPage.hero.imgSecondary.media.url}
+                alt={dataPage.hero.imgSecondary.alt.altText}
+                formats={["webp", "avif"]}
+                fallbackFormat="jpeg"
+                inferSize={true}
+                quality={"high"}
+                densities={[1.5, 2]}
+              />
+              <div class="watermark watermark--40">{dataCompany.watermark}</div>
+            </div>
+            <ScrollTo classToScroll="intro" client:idle>
+              <Picture
+                class="img hero__circleSvg rotate"
+                src={dataPage.hero.btnImg1.media.url}
+                alt={dataPage.hero.btnImg1.alt.altText}
+                formats={["webp", "avif"]}
+                fallbackFormat="jpeg"
+                inferSize={true}
+                quality={"high"}
+                densities={[1.5, 2]}
+              />
+              <Picture
+                class="img hero__arrowSvg"
+                src={dataPage.hero.btnImg2.media.url}
+                alt={dataPage.hero.btnImg2.alt.altText}
+                formats={["webp", "avif"]}
+                fallbackFormat="jpeg"
+                inferSize={true}
+                quality={"high"}
+                densities={[1.5, 2]}
+              />
+            </ScrollTo>
+          </div>
+        </section>
+      )
+    }
+    {
+      dataPage.intro.setActive && (
+        <section id={dataPage.intro.nameNav} class="intro">
+          <div class="column__2 fadeInOut">
+            <did class="col__left">
+              <PortableTextCustom
+                data={dataPage.intro.portableText}
+                client:idle
+              />
+              <OpenModalBtn openModalOf=".modal" client:only="react">
+                {dataPage.intro.btn2}
+              </OpenModalBtn>
+              <a
+                href={`${dataPage.intro.btnFile?.media.url}`}
+                target="_blank"
+                class="btn btn__brochure"
+              >
+                {dataPage.intro.btn}
+              </a>
+              <div class="imageWatermarkBox">
+                <div class="watermark">{dataCompany.watermark}</div>
+                <Picture
+                  class="img"
+                  src={dataPage.intro.img2.media.url}
+                  alt={dataPage.intro.img2.alt.altText}
+                  formats={["webp", "avif"]}
+                  fallbackFormat="jpeg"
+                  inferSize={true}
+                  quality={"high"}
+                  densities={[1.5, 2]}
+                />
+              </div>
+            </did>
+            <did class="col__right">
+              <div class="imageWatermarkBox">
+                <div class="watermark">{dataCompany.watermark}</div>
+                <Picture
+                  class="img"
+                  src={dataPage.intro.img.media.url}
+                  alt={dataPage.intro.img.alt.altText}
+                  formats={["webp", "avif"]}
+                  fallbackFormat="jpeg"
+                  inferSize={true}
+                  quality={"high"}
+                  densities={[1.5, 2]}
+                />
+              </div>
+            </did>
+          </div>
+          <div class="column__1 fadeInOut">
+            <ul role="list" class="intro__amenities">
+              {dataPage.intro.amenities.map((amenity) => (
+                <li>
+                  <Picture
+                    class="img"
+                    src={amenity.icon.media.url}
+                    alt={amenity.icon.alt.altText}
+                    formats={["webp", "avif", "svg"]}
+                    fallbackFormat="svg"
+                    inferSize={true}
+                    quality={"high"}
+                    densities={[1.5, 2]}
+                  />
+                  {amenity.name}
+                </li>
+              ))}
+            </ul>
+          </div>
+          <SvgText
+            client:idle
+            className="svgTextBottom"
+            dataImg={dataPage.intro.svgTextBottom}
+          />
+        </section>
+      )
+    }
+    {
+      dataPage.location.setActive && (
+        <section id={dataPage.location.nameNav} class="location">
+          <SvgText
+            client:idle
+            className="svgTextTop"
+            dataImg={dataPage.location.svgTextTop}
+          />
+          <div class="column__2 location__intro fadeInOut">
+            <div class="col__left">
+              <Picture
+                class="img"
+                src={dataPage.location.imgIntro.media.url}
+                alt={dataPage.location.imgIntro.alt.altText}
+                formats={["webp", "avif"]}
+                fallbackFormat="jpeg"
+                inferSize={true}
+                quality={"high"}
+                densities={[1.5, 2]}
+              />
+            </div>
+            <div class="col__right">
+              <PortableTextCustom
+                client:idle
+                data={dataPage.location.portableTextIntro}
+              />
+              <div class="imageWatermarkBox">
+                <div class="watermark">{dataCompany.watermark}</div>
+                <Picture
+                  class="img"
+                  src={dataPage.location.imgIntro2.media.url}
+                  alt={dataPage.location.imgIntro2.alt.altText}
+                  formats={["webp", "avif"]}
+                  fallbackFormat="jpeg"
+                  inferSize={true}
+                  quality={"high"}
+                  densities={[1.5, 2]}
+                />
+              </div>
+            </div>
+          </div>
+          <div class="column__2 fadeInOut">
+            <div class="col__left">
+              <PortableTextCustom
+                data={dataPage.location.portableText}
+                client:idle
+              />
+              <a
+                href={`${dataPage.location.btnLink}`}
+                class="btn btn__location"
+                target="_blank"
+              >
+                {dataPage.location.btn}
+              </a>
+            </div>
+            <div class="col__right">
+              <Picture
+                class="img"
+                src={dataPage.location.img.media.url}
+                alt={dataPage.location.img.alt.altText}
+                formats={["webp", "avif"]}
+                fallbackFormat="jpeg"
+                inferSize={true}
+                quality={"high"}
+                densities={[1.5, 2]}
+              />
+              <a
+                class="location__pin"
+                href={`${dataPage.location.btnLink}`}
+                target="_blank"
+              >
+                <Picture
+                  src={dataPage.location.imgPin.media.url}
+                  alt={dataPage.location.imgPin.alt.altText}
+                  formats={["webp", "avif"]}
+                  fallbackFormat="jpeg"
+                  inferSize={true}
+                  quality={"high"}
+                  densities={[1.5, 2]}
+                />
+              </a>
+            </div>
+          </div>
+        </section>
+      )
+    }
+    {/* DIVISOR 1  */}
+    {
+      dataPage.divisor1.setActive && (
+        <Divisor
+          client:idle
+          dataWatermark={dataCompany.watermark}
+          dataMainImg={dataPage.divisor1.img}
+          dataSvgText={dataPage.divisor1.svgTextBottom}
+        />
+      )
+    }
+    {
+      dataPage.sustainability.setActive && (
+        <section
+          id={dataPage.sustainability.nameNav}
+          class="sustainability fadeInOut"
+        >
+          <SvgText
+            client:idle
+            className="svgTextTop"
+            dataImg={dataPage.sustainability.svgTextTop}
+          />
+          <div class="column__2">
+            <div class="col__left">
+              <PortableTextCustom
+                client:idle
+                data={dataPage.sustainability.portableText}
+              />
+              <OpenModalBtn openModalOf=".modal" client:only="react">
+                {dataPage.sustainability.btn}
+              </OpenModalBtn>
+            </div>
+            <div class="col__right">
+              <div class="imageWatermarkBox">
+                <div class="watermark">{dataCompany.watermark}</div>
+                <Picture
+                  class="img"
+                  src={dataPage.sustainability.img.media.url}
+                  alt={dataPage.sustainability.img.alt.altText}
+                  formats={["webp", "avif"]}
+                  fallbackFormat="jpeg"
+                  inferSize={true}
+                  quality={"high"}
+                  densities={[1.5, 2]}
+                />
+              </div>
+            </div>
+          </div>
+          <div class="column__1">
+            <PortableTextCustom
+              data={dataPage.sustainability.portableText2}
+              client:idle
+            />
+            <SplideSUS
+              client:idle
+              dataSlide={dataPage.sustainability.list}
+              dataWatermark={dataCompany.watermark}
+            />
+          </div>
+        </section>
+      )
+    }
+    {
+      dataPage.divisor2.setActive && (
+        <Divisor
+          client:idle
+          dataWatermark={dataCompany.watermark}
+          dataMainImg={dataPage.divisor2.img}
+          dataSvgText={dataPage.divisor2.svgTextBottom}
+        />
+      )
+    }
+    {
+      dataPage.amenities.setActive && (
+        <section id={dataPage.amenities.nameNav} class="amenities fadeInOut">
+          <SvgText
+            client:idle
+            className="svgTextTop"
+            dataImg={dataPage.amenities.svgTextTop}
+          />
+          <div class="column__2">
+            <div class="col__left">
+              <PortableTextCustom
+                data={dataPage.amenities.portableText}
+                client:idle
+              />
+              <OpenModalBtn openModalOf=".modal" client:idle>
+                {dataPage.amenities.btn}
+              </OpenModalBtn>
+            </div>
+            <div class="col__right">
+              <SplideTabs client:idle dataSplide={dataPage.amenities.tabs} />
+            </div>
+          </div>
+          <div class="column__1">
+            <ul class="listado__x5" role="list">
+              {dataPage.amenities.list.map((amenity) => (
+                <li>
+                  <Picture
+                    class="img"
+                    src={amenity.img.media.url}
+                    alt={amenity.img.alt.altText}
+                    formats={["webp", "avif", "svg"]}
+                    fallbackFormat="svg"
+                    inferSize={true}
+                    quality={"high"}
+                    densities={[1.5, 2]}
+                  />
+                  <p>{amenity.name}</p>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </section>
+      )
+    }
+    {
+      dataPage.divisor3.setActive && (
+        <Divisor
+          client:idle
+          dataWatermark={dataCompany.watermark}
+          dataMainImg={dataPage.divisor3.img}
+        />
+      )
+    }
+    {
+      dataPage.gallery.setActive && (
+        <section id={dataPage.gallery.nameNav} class="gallery fadeInOut">
+          <div class="column__1">
+            <PortableTextCustom
+              client:idle
+              data={dataPage.gallery.portableText}
+            />
+            <LightBox
+              client:idle
+              images={dataPage.gallery.list.map((img) => ({
+                src: img.media.url,
+                alt: img.alt.altText,
+              }))}
+            >
+              <ul class="listado__x6" role="list">
+                {dataPage.gallery.list.map((img) => (
+                  <li>
+                    <Picture
+                      class="img"
+                      src={img.media.url}
+                      alt={img.alt.altText}
+                      formats={["webp", "avif", "jpg"]}
+                      fallbackFormat="jpg"
+                      inferSize={true}
+                      quality={"high"}
+                      densities={[1.5, 2]}
+                    />
+                  </li>
+                ))}
+              </ul>
+            </LightBox>
+            <OpenModalBtn openModalOf=".modal" client:idle>
+              {dataPage.gallery.btn}
+            </OpenModalBtn>
+          </div>
+          <SvgText
+            client:idle
+            className="svgTextBottom"
+            dataImg={dataPage.gallery.svgTextBottom}
+          />
+        </section>
+      )
+    }
+    <Footer script={dataPage.form.script} />
+  </ScrollSmootherProvider>
+  <FormModal script={dataPage.form.script} />
+</Layout>
+<script define:vars={{ colors: dataCompany.colors }}>
+  document.addEventListener("DOMContentLoaded", () => {
+    const {
+      primary,
+      primaryLight,
+      primaryDark,
+      secondary,
+      secondaryLight,
+      secondaryDark,
+      accent,
+    } = colors;
+
+    const style = document.createElement("style");
+    style.textContent = `
+    :root {
+      --color-primary: ${primary.hex};
+      --color-primary-light: ${primaryLight.hex};
+      --color-primary-dark: ${primaryDark.hex};
+      --color-secondary: ${secondary.hex};
+      --color-secondary-light: ${secondaryLight.hex};
+      --color-secondary-dark: ${secondaryDark.hex};
+      --color-accent: ${accent.hex};
+      --color-black: #1D1D1D;
+      }
+      `;
+    document.head.appendChild(style);
+  });
+</script>
+{/*<script src="../scripts/mountSplide.js"></script>*/}

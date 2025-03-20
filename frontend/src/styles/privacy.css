@@ -1,0 +1,26 @@
+#nav{
+    position: fixed;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 20px;
+    height: 60px;
+    background-color: var(--color-primaryDark);
+    z-index: 99;
+    a{
+        margin: 0;
+        height: 100%;
+    }
+    picture{
+        width: 100px;
+        height: 100%;
+        img{
+            height: 100%;
+            object-fit: contain;
+        }
+    }
+}
+#hero {
+    padding: 5%;
+}

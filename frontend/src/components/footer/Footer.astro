@@ -1,0 +1,69 @@
+---
+import "../../styles/footer.css";
+import { Picture } from "astro:assets";
+import PortableTextCustom from "../ui/portableText/PortableTextCustom";
+import { getDataCompany } from "../../_data/company";
+import type { Company } from "../../_types/company";
+import Form from "./Form";
+
+const dataCompany: Company = await getDataCompany();
+const { script } = Astro.props;
+---
+
+<footer id="footer" class="footer fadeInOut">
+  <div class="column__1">
+    <PortableTextCustom
+      data={dataCompany.contact.portableText}
+      client:only="react"
+    />
+  </div>
+  <div class="column__2">
+    <div class="col__left">
+      <div class="bloque__contacto">
+        <h3>Teléfono:</h3>
+        <a href={`tel: ${dataCompany.contact.tel}`} target="_blank"
+          >{dataCompany.contact.tel}</a
+        >
+      </div>
+      <div class="bloque__contacto">
+        <h3>Correo electrónico:</h3>
+        <a href={`mailto: ${dataCompany.contact.email}`} target="_blank"
+          >{dataCompany.contact.email}</a
+        >
+      </div>
+      <div class="bloque__contacto">
+        <h3>Oficinas:</h3>
+        <a href={`${dataCompany.contact.dirLink}`} target="_blank"
+          >{dataCompany.contact.dir}</a
+        >
+      </div>
+      <div class="bloque__contacto">
+        <h3>Síguenos en:</h3>
+        {
+          dataCompany.contact.social.map(
+            (social: {
+              url: string | URL | null | undefined;
+              name: unknown;
+            }) => (
+              <a href={social.url} target="_blank">
+                {social.name}
+              </a>
+            )
+          )
+        }
+      </div>
+      <div class="bloque__contacto">
+        <a href={`/aviso-de-privacidad`}>Aviso de Privacidad</a>
+      </div>
+      <div class="bloque__contacto">
+      </div>
+    </div>
+    <div class="col__right">
+      <Form scriptData={script} client:load/>
+    </div>
+  </div>
+  <span class="footer__copy">
+    © {dataCompany.name} - Todos los derechos reservados | Sitio web creado por
+    <a href="https://marker.com.mx/" target="_blank">Marker branding</a>
+  </span>
+</footer>

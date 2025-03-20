@@ -1,0 +1,34 @@
+---
+import GsapContext from "../_lib/gsap/GsapContext";
+import "../styles/_globals.css";
+import "../styles/_reset.css";
+
+const { title, desc, keywords } = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="generator" content={Astro.generator} />
+    <title>{title || "Titulo de pagina"}</title>
+    <meta name="description" content={desc || "Base de una descripción"} />
+    <meta name="keywords" content={keywords || "0, 0, 0, 0"} />
+  </head>
+  <body class="body">
+    <GsapContext client:only="react">
+      <slot />
+    </GsapContext>
+  </body>
+</html>
+
+<style>
+  html,
+  body {
+    margin: 0;
+    width: 100%;
+    height: 100%;
+  }
+</style>

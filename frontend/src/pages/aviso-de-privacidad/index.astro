@@ -1,0 +1,65 @@
+---
+import "../../styles/privacy.css";
+import ScrollSmootherProvider from "../../_lib/gsap/ScrollSmootherProvider";
+import PortableTextCustom from "../../components/ui/portableText/PortableTextCustom";
+import Layout from "../../layouts/Layout.astro";
+import Footer from "../../components/footer/Footer.astro";
+import { getDataCompany } from "../../_data/company";
+import type { Company } from "../../_types/company";
+import { getDataPage } from "../../_data/page";
+import type { Page } from "../../_types/page";
+import { Picture } from "astro:assets";
+
+const dataCompany: Company = await getDataCompany();
+const dataPage: Page = await getDataPage();
+---
+
+<Layout>
+  <nav id="nav">
+    <a href="/">
+      <Picture
+        src={dataCompany.contact.imgNav.media.url}
+        alt={dataCompany.contact.imgNav.alt.altText}
+        formats={["svg", "png"]}
+        fallbackFormat="svg"
+        inferSize={true}
+        quality={"high"}
+        densities={[1.5, 2]}
+      />
+    </a>
+  </nav>
+  <ScrollSmootherProvider>
+    <section id="hero">
+      <PortableTextCustom data={dataCompany.privacy.portableText} />
+    </section>
+    <Footer dataPage={dataPage} />
+  </ScrollSmootherProvider>
+</Layout>
+
+<script define:vars={{ colors: dataCompany.colors }}>
+  document.addEventListener("DOMContentLoaded", () => {
+    const {
+      primary,
+      primaryLight,
+      primaryDark,
+      secondary,
+      secondaryLight,
+      secondaryDark,
+      accent,
+    } = colors;
+
+    const style = document.createElement("style");
+    style.textContent = `
+            :root {
+              --color-primary: ${primary.hex};
+              --color-primaryLight: ${primaryLight.hex};
+              --color-primaryDark: ${primaryDark.hex};
+              --color-secondary: ${secondary.hex};
+              --color-secondaryLight: ${secondaryLight.hex};
+              --color-secondaryDark: ${secondaryDark.hex};
+              --color-accent: ${accent.hex};
+            }
+          `;
+    document.head.appendChild(style);
+  });
+</script>

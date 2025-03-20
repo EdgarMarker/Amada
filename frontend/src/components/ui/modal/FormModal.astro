@@ -1,0 +1,12 @@
+---
+import Form from "../../footer/Form";
+import CloseModalBtn from "../btn/CloseModalBtn";
+const { script } = Astro.props;
+---
+
+<div class="modal">
+  <div class="modal__content">
+    <CloseModalBtn closeModalOf=".modal" client:only="react" />
+    <Form scriptData={script} client:visible />
+  </div>
+</div>

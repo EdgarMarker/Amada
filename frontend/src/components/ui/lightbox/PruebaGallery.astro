@@ -1,0 +1,156 @@
+---
+import type { Page } from "../../../_types/page";
+
+// Galeria.astro
+// Este componente recibe un array de imágenes y muestra una galería con vista detallada
+
+const { dataGallery } = Astro.props;
+
+const data: Page = dataGallery;
+---
+
+<div class="galeria-container">
+  <!-- Vista de galería con imágenes en miniatura -->
+  <div class="galeria-grid">
+    {
+      data.gallery.list.map((image, index) => (
+        <div class="galeria-item" data-id={index}>
+          <img
+            src={image.media.url}
+            alt={image.alt.altText}
+            loading="lazy"
+            class="galeria-thumbnail"
+          />
+        </div>
+      ))
+    }
+  </div>
+
+  <!-- Vista ampliada para imagen seleccionada -->
+  <div class="galeria-modal" id="modalGallery">
+    <button class="modal-close" id="modalGalleryClose">&times;</button>
+    <div class="splide" id="imageSlider">
+      <div class="splide__track">
+        <ul class="splide__list">
+          {
+            data.gallery.list.map((image) => (
+              <li class="splide__slide">
+                <div class="slide-content">
+                  <img
+                    src={image.media.url}
+                    alt={image.alt.altText}
+                    class="modal-image"
+                  />
+                </div>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  /* Estilos para la galería */
+  .galeria-container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .galeria-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 1rem;
+    margin-bottom: 2rem;
+  }
+
+  .galeria-item {
+    position: relative;
+    cursor: pointer;
+    overflow: hidden;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+    aspect-ratio: 1/1;
+  }
+
+  .galeria-item:hover {
+    transform: translateY(-5px);
+  }
+
+  .galeria-thumbnail {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+  }
+
+  .galeria-item:hover .galeria-thumbnail {
+    transform: scale(1.05);
+  }
+
+  /* Estilos para el modal */
+  .galeria-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.9);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    opacity: 0;
+    visibility: hidden;
+    transition:
+      opacity 0.3s ease,
+      visibility 0.3s ease;
+  }
+
+  .galeria-modal.active {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  .modal-close {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background: none;
+    border: none;
+    color: white;
+    font-size: 2rem;
+    cursor: pointer;
+    z-index: 1010;
+  }
+
+  .slide-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    padding: 20px;
+  }
+
+  .modal-image {
+    max-height: 90vh;
+    max-width: 90vw;
+    object-fit: contain;
+  }
+
+  /* Personalización de Splide */
+  :global(.splide__arrow) {
+    background-color: rgba(255, 255, 255, 0.3);
+  }
+
+  :global(.splide__pagination__page) {
+    background-color: rgba(255, 255, 255, 0.3);
+  }
+
+  :global(.splide__pagination__page.is-active) {
+    background-color: white;
+  }
+</style>
