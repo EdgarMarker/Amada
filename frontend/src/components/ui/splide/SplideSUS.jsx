@@ -23,8 +23,8 @@ const SplideSUS = ({ dataSlide, dataWatermark }) => {
         {dataSlide.map((item) => (
           <SplideSlide>
             <div className="card card__sustainability">
-              <div class="imageWatermarkBox">
-                <div class="watermark">{dataWatermark}</div>
+              <div className="imageWatermarkBox">
+                <div className="watermark">{dataWatermark}</div>
                 <OptimizedImage
                   src={item.media.url}
                   alt={item.alt.altText}
