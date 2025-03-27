@@ -8,7 +8,9 @@ const GsapContext = ({ children }: Props) => {
   useGSAP(
     () => {
       AnimationManager.animateHeader();
+      AnimationManager.initFrase();
       AnimationManager.initBatchAnimations();
+      AnimationManager.animateDivisor();
     },
     { scope: wrapper }
   );

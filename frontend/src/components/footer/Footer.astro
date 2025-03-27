@@ -12,13 +12,14 @@ const { script } = Astro.props;
 
 <footer id="footer" class="footer fadeInOut">
   <div class="column__1">
-    <PortableTextCustom
-      data={dataCompany.contact.portableText}
-      client:only="react"
-    />
+    
   </div>
   <div class="column__2">
     <div class="col__left">
+      <PortableTextCustom
+      data={dataCompany.contact.portableText}
+      client:only="react"
+      />
       <div class="bloque__contacto">
         <h3>Teléfono:</h3>
         <a href={`tel: ${dataCompany.contact.tel}`} target="_blank"

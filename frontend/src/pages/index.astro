@@ -39,7 +39,7 @@ const dataCompany: Company = await getDataCompany();
                 class="img hero__icon"
                 src={dataPage.hero.icon.media.url}
                 alt={dataPage.hero.icon.alt.altText}
-                formats={["webp", "avif"]}
+                formats={["svg", "webp", "avif"]}
                 fallbackFormat="jpeg"
                 inferSize={true}
                 quality={"high"}
@@ -52,66 +52,88 @@ const dataCompany: Company = await getDataCompany();
                 class="img hero__svgText"
                 src={dataPage.hero.svgText.media.url}
                 alt={dataPage.hero.svgText.alt.altText}
-                formats={["webp", "avif"]}
+                formats={["svg", "webp", "avif"]}
                 fallbackFormat="jpeg"
                 inferSize={true}
                 quality={"high"}
                 densities={[1.5, 2]}
               />
             </div>
-            <Picture
+            
+            <div class="hero__watermark">{dataCompany.watermark}</div>
+          </div>
+          <Picture
               class="img hero__imgMain"
               src={dataPage.hero.imgMain.media.url}
               alt={dataPage.hero.imgMain.alt.altText}
+              formats={["webp", "avif"]}
+              fallbackFormat="png"
+              inferSize={true}
+              quality={"high"}
+              densities={[1.5, 2]}
+            />
+            <div class="video__bg">
+              <video width="1920" height="1080" autoplay loop muted>
+                <source src="https://elarcamerida.mx/wp-content/uploads/2022/11/cielo2.mp4" type="video/mp4">
+                Tu navegador no soporta video, te recomendamos actualizalo o cambiar de navegador.
+              </video>
+              
+            </div>
+        </section>
+
+        <section class="hero__intro">
+          <div class="column__1">
+            <PortableTextCustom
+              id="brown"
+              data={dataPage.hero.portableText}
+              client:idle
+            />
+
+            <div class="hero__imgSecondaryBox imageWatermarkBox" style={`background-image: url(${dataPage.hero.imgSecondary.media.url});`}>
+            
+              <PortableTextCustom
+              id="white"
+              data={dataPage.hero.portableText}
+              client:idle
+            />
+            {/*<Picture
+              class="img"
+              src={dataPage.hero.imgSecondary.media.url}
+              alt={dataPage.hero.imgSecondary.alt.altText}
+              formats={["webp", "avif"]}
+              fallbackFormat="jpeg"
+              inferSize={true}
+              quality={"high"}
+              densities={[1.5, 2]}
+            /> */}
+            <div class="watermark watermark--40">{dataCompany.watermark}</div>
+          </div>
+            
+
+          <ScrollTo classToScroll="intro" client:idle>
+            
+            <Picture
+              class="img hero__circleSvg rotate"
+              src={dataPage.hero.btnImg1.media.url}
+              alt={dataPage.hero.btnImg1.alt.altText}
               formats={["webp", "avif"]}
               fallbackFormat="jpeg"
               inferSize={true}
               quality={"high"}
               densities={[1.5, 2]}
             />
-            <div class="hero__watermark">{dataCompany.watermark}</div>
-          </div>
-          <div class="column__1">
-            <PortableTextCustom
-              id="heroH2"
-              data={dataPage.hero.portableText}
-              client:idle
+            
+            <Picture
+              class="img hero__arrowSvg"
+              src={dataPage.hero.btnImg2.media.url}
+              alt={dataPage.hero.btnImg2.alt.altText}
+              formats={["webp", "avif"]}
+              fallbackFormat="jpeg"
+              inferSize={true}
+              quality={"high"}
+              densities={[1.5, 2]}
             />
-            <div class="hero__imgSecondaryBox imageWatermarkBox">
-              <Picture
-                class="img"
-                src={dataPage.hero.imgSecondary.media.url}
-                alt={dataPage.hero.imgSecondary.alt.altText}
-                formats={["webp", "avif"]}
-                fallbackFormat="jpeg"
-                inferSize={true}
-                quality={"high"}
-                densities={[1.5, 2]}
-              />
-              <div class="watermark watermark--40">{dataCompany.watermark}</div>
-            </div>
-            <ScrollTo classToScroll="intro" client:idle>
-              <Picture
-                class="img hero__circleSvg rotate"
-                src={dataPage.hero.btnImg1.media.url}
-                alt={dataPage.hero.btnImg1.alt.altText}
-                formats={["webp", "avif"]}
-                fallbackFormat="jpeg"
-                inferSize={true}
-                quality={"high"}
-                densities={[1.5, 2]}
-              />
-              <Picture
-                class="img hero__arrowSvg"
-                src={dataPage.hero.btnImg2.media.url}
-                alt={dataPage.hero.btnImg2.alt.altText}
-                formats={["webp", "avif"]}
-                fallbackFormat="jpeg"
-                inferSize={true}
-                quality={"high"}
-                densities={[1.5, 2]}
-              />
-            </ScrollTo>
+          </ScrollTo>
           </div>
         </section>
       )
@@ -121,20 +143,24 @@ const dataCompany: Company = await getDataCompany();
         <section id={dataPage.intro.nameNav} class="intro">
           <div class="column__2 fadeInOut">
             <did class="col__left">
-              <PortableTextCustom
-                data={dataPage.intro.portableText}
-                client:idle
-              />
-              <OpenModalBtn openModalOf=".modal" client:only="react">
-                {dataPage.intro.btn2}
-              </OpenModalBtn>
-              <a
-                href={`${dataPage.intro.btnFile?.media.url}`}
-                target="_blank"
-                class="btn btn__brochure"
-              >
-                {dataPage.intro.btn}
-              </a>
+              
+              <div>
+                <PortableTextCustom
+                  data={dataPage.intro.portableText}
+                  client:idle
+                />
+                <OpenModalBtn openModalOf=".modal" client:only="react">
+                  {dataPage.intro.btn2}
+                </OpenModalBtn>
+                <a
+                  href={`${dataPage.intro.btnFile?.media.url}`}
+                  target="_blank"
+                  class="btn btn__brochure"
+                >
+                  {dataPage.intro.btn}
+                </a>
+              </div>
+
               <div class="imageWatermarkBox">
                 <div class="watermark">{dataCompany.watermark}</div>
                 <Picture
@@ -148,6 +174,7 @@ const dataCompany: Company = await getDataCompany();
                   densities={[1.5, 2]}
                 />
               </div>
+
             </did>
             <did class="col__right">
               <div class="imageWatermarkBox">
@@ -173,13 +200,13 @@ const dataCompany: Company = await getDataCompany();
                     class="img"
                     src={amenity.icon.media.url}
                     alt={amenity.icon.alt.altText}
-                    formats={["webp", "avif", "svg"]}
+                    formats={["svg", "webp", "avif"]}
                     fallbackFormat="svg"
                     inferSize={true}
                     quality={"high"}
                     densities={[1.5, 2]}
                   />
-                  {amenity.name}
+                  <h3>{amenity.name}</h3>
                 </li>
               ))}
             </ul>
@@ -233,7 +260,7 @@ const dataCompany: Company = await getDataCompany();
               </div>
             </div>
           </div>
-          <div class="column__2 fadeInOut">
+          <div class="column__2 location__outro fadeInOut">
             <div class="col__left">
               <PortableTextCustom
                 data={dataPage.location.portableText}
@@ -252,7 +279,7 @@ const dataCompany: Company = await getDataCompany();
                 class="img"
                 src={dataPage.location.img.media.url}
                 alt={dataPage.location.img.alt.altText}
-                formats={["webp", "avif"]}
+                formats={["svg", "webp", "avif"]}
                 fallbackFormat="jpeg"
                 inferSize={true}
                 quality={"high"}
@@ -477,6 +504,14 @@ const dataCompany: Company = await getDataCompany();
       }
       `;
     document.head.appendChild(style);
+
+
   });
 </script>
+
+
+
+
+
+
 {/*<script src="../scripts/mountSplide.js"></script>*/}

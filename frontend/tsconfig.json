@@ -1,6 +1,12 @@
 {
   "compilerOptions": {
-    "jsx": "react"
+    "esModuleInterop": true,
+    "module": "ESNext",
+    "moduleResolution": "Node",
+    "jsx": "react-jsx",
+    "allowSyntheticDefaultImports": true,
+    "target": "ESNext",
+    "types": ["astro/client"]
   },
   "extends": "astro/tsconfigs/strict",
   "include": [".astro/types.d.ts", "**/*"],

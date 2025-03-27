@@ -5,8 +5,12 @@ import { ScrollSmoother } from "gsap/ScrollSmoother";
 import ScrollToPlugin from "gsap/ScrollToPlugin";
 import { useGSAP } from "@gsap/react";
 
+
+
 // Registrar plugins
 gsap.registerPlugin(ScrollTrigger, ScrollToPlugin, ScrollSmoother, useGSAP);
+
+
 
 //Exportar useGSAP
 
@@ -16,6 +20,22 @@ export { useGSAP };
 export const AnimationManager = {
   // Almacena animaciones registradas
   animations: {},
+
+  
+  // Frase baja
+  initFrase(){
+    let frases = gsap.utils.toArray(["#brown", "#white"]);
+    gsap.to(frases, {
+      y: "-35%",
+      scrollTrigger: {
+        trigger: ".hero__intro",
+        start: "20% bottom",
+        end: "bottom top",
+        scrub: true,
+      }
+    })
+  },
+  
 
   // Inicializa solo ScrollSmoother
   initScrollSmoother() {
@@ -34,9 +54,12 @@ export const AnimationManager = {
     });
   },
 
+
   // Inicializa animaciones batch para elementos con clases específicas
   initBatchAnimations() {
     const stagger = 0.1;
+
+    
 
     // Seleccionar elementos para animaciones
     const elements = {
@@ -158,17 +181,25 @@ export const AnimationManager = {
     const header = document.getElementById("header");
     const intro = document.querySelector(".intro");
 
-    if (!header || !intro) return;
-
-    gsap.to(header, {
-      duration: 1.5,
-      top: "0px",
-      ease: "power1.in",
-      scrollTrigger: {
+    
+    ScrollTrigger.create({
         trigger: intro,
-        start: "top top",
-        end: "100px top",
-      },
+        endTrigger: "footer",
+        start: "top bottom",
+        end: "bottom top",
+        ease: "power.in",
+        onEnter: () => {
+          gsap.to(header, {y: 70});
+        },
+        onLeave: () => {
+          gsap.to(header, {y: 0});
+        },
+        onEnterBack: () => {
+          gsap.to(header, {y: 70});
+        },
+        onLeaveBack: () => {
+          gsap.to(header, {y: 0});
+        },
     });
   },
 
@@ -232,6 +263,9 @@ export const AnimationManager = {
       });
     }
   },
+
+
+  
 
   // Animación de héroe
   animateHero() {

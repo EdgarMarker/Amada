@@ -1,8 +1,7 @@
+// astro.config.mjs
 import { defineConfig } from "astro/config";
 import sanity from "@sanity/astro";
 import react from "@astrojs/react";
-import path from "path";
-import { fileURLToPath } from "url"; // Importa fileURLToPath
 
 const { VITE_SANITY_PROJECT_ID, VITE_SANITY_DATASET } = import.meta.env;
 
@@ -24,4 +23,18 @@ export default defineConfig({
     }),
     react(),
   ],
+  vite: {
+    optimizeDeps: {
+      include: [
+        'gsap',
+        'gsap/ScrollTrigger',
+        'gsap/ScrollToPlugin',
+        'gsap/ScrollSmoother',
+        '@splidejs/react-splide'
+      ]
+    },
+    ssr: {
+      noExternal: ['gsap', '@splidejs/react-splide']
+    }
+  }
 });
