@@ -15,9 +15,12 @@ const SplideSUS = ({ dataSlide, dataWatermark }) => {
       <Splide
         aria-label="Imágenes de sección sustentable"
         options={{
-          perPage: 3,
+          perPage: 2,
+          perMove: 1,
           gap: "1em",
+          padding: { left: '5%', right: '20%' },
           pagination: false,
+          focus  : 'center',
         }}
       >
         {dataSlide.map((item) => (

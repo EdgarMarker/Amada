@@ -48,33 +48,36 @@ const dataCompany: Company = await getDataCompany();
             </div>
             <div class="hero__svgAndH1Box">
               <h1>{dataPage.hero.h1}</h1>
-              <Picture
-                class="img hero__svgText"
-                src={dataPage.hero.svgText.media.url}
-                alt={dataPage.hero.svgText.alt.altText}
-                formats={["svg", "webp", "avif"]}
-                fallbackFormat="jpeg"
-                inferSize={true}
-                quality={"high"}
-                densities={[1.5, 2]}
-              />
+              <div style={`background-image: url(${dataPage.hero.svgText.media.url})`}>
+                <Picture
+                  class="img hero__svgText"
+                  src={dataPage.hero.svgText.media.url}
+                  alt={dataPage.hero.svgText.alt.altText}
+                  formats={["svg", "webp", "avif"]}
+                  fallbackFormat="jpeg"
+                  inferSize={true}
+                  quality={"high"}
+                  densities={[1.5, 2]}
+                />
+              </div>
+              
             </div>
             
             <div class="hero__watermark">{dataCompany.watermark}</div>
           </div>
           <Picture
-              class="img hero__imgMain"
-              src={dataPage.hero.imgMain.media.url}
-              alt={dataPage.hero.imgMain.alt.altText}
-              formats={["webp", "avif"]}
-              fallbackFormat="png"
-              inferSize={true}
-              quality={"high"}
-              densities={[1.5, 2]}
-            />
+            class="img hero__imgMain"
+            src={dataPage.hero.imgMain.media.url}
+            alt={dataPage.hero.imgMain.alt.altText}
+            formats={["webp", "avif"]}
+            fallbackFormat="png"
+            inferSize={true}
+            quality={"high"}
+            densities={[1.5, 2]}
+          />
             <div class="video__bg">
               <video width="1920" height="1080" autoplay loop muted>
-                <source src="https://elarcamerida.mx/wp-content/uploads/2022/11/cielo2.mp4" type="video/mp4">
+                <source src="./cielo_amada.mp4" type="video/mp4">
                 Tu navegador no soporta video, te recomendamos actualizalo o cambiar de navegador.
               </video>
               

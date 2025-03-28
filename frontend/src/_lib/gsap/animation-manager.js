@@ -35,6 +35,37 @@ export const AnimationManager = {
       }
     })
   },
+
+  // Frase baja
+  initFrase(){
+    let frases = gsap.utils.toArray(["#brown", "#white"]);
+    gsap.to(frases, {
+      y: "-35%",
+      scrollTrigger: {
+        trigger: ".hero__intro",
+        start: "20% bottom",
+        end: "bottom top",
+        scrub: true,
+      }
+    })
+  },
+
+  // Frase baja
+  initHeroFrase(){
+    gsap.to(".hero__svgAndH1Box div", {
+      scale: 1.3,
+      opacity: 0,
+      transformOrigin: "bottom center",
+      duration: 1.5,
+      ease: "power2.inOut",
+      scrollTrigger: {
+        trigger: ".hero__intro",
+        start: "top bottom",
+        end: "bottom bottom",
+        scrub: true,
+      }
+    });
+  },
   
 
   // Inicializa solo ScrollSmoother
@@ -59,65 +90,68 @@ export const AnimationManager = {
   initBatchAnimations() {
     const stagger = 0.1;
 
-    
+    if (typeof window === "undefined") return;
 
-    // Seleccionar elementos para animaciones
-    const elements = {
-      h2: document.querySelectorAll(".fadeInOut h2"),
-      h3: document.querySelectorAll(".fadeInOut h3"),
-      p: document.querySelectorAll(".fadeInOut p"),
-      img: document.querySelectorAll(".fadeInOut img.img"),
-    };
+    requestAnimationFrame(() => {
 
-    // Configurar estado inicial
-    if (elements.h2.length) gsap.set(elements.h2, { opacity: 0, x: -50 });
-    if (elements.h3.length) gsap.set(elements.h3, { opacity: 0, x: -50 });
-    if (elements.p.length) gsap.set(elements.p, { opacity: 0, y: 50 });
-    if (elements.img.length) gsap.set(elements.img, { opacity: 0, y: 50 });
+      // Seleccionar elementos para animaciones
+      const elements = {
+        h2: document.querySelectorAll(".fadeInOut h2"),
+        h3: document.querySelectorAll(".fadeInOut h3"),
+        p: document.querySelectorAll(".fadeInOut p"),
+        img: document.querySelectorAll(".fadeInOut img.img"),
+      };
 
-    // Crear batch ScrollTrigger
-    ScrollTrigger.batch(
-      [".fadeInOut h3", ".fadeInOut h2", ".fadeInOut p", ".fadeInOut img.img"],
-      {
-        start: "top 80%",
-        end: "top 80%",
-        onEnter: (batch) =>
-          gsap.to(batch, {
-            opacity: 1,
-            y: 0,
-            x: 0,
-            stagger: stagger,
-            overwrite: true,
-            force3D: true,
-          }),
-        onLeave: (batch) =>
-          gsap.to(batch, {
-            opacity: 1,
-            y: 0,
-            x: 0,
-            stagger: stagger,
-            overwrite: true,
-            force3D: true,
-          }),
-        onEnterBack: (batch) =>
-          gsap.to(batch, {
-            opacity: 1,
-            y: 0,
-            x: 0,
-            stagger: stagger,
-            overwrite: true,
-            force3D: true,
-          }),
-        onLeaveBack: (batch) =>
-          gsap.to(batch, {
-            opacity: 0,
-            y: 50,
-            stagger: stagger,
-            overwrite: true,
-            force3D: true,
-          }),
-      }
-    );
+      // Configurar estado inicial
+      if (elements.h2.length) gsap.set(elements.h2, { opacity: 0, x: -50 });
+      if (elements.h3.length) gsap.set(elements.h3, { opacity: 0, x: -50 });
+      if (elements.p.length) gsap.set(elements.p, { opacity: 0, y: 50 });
+      if (elements.img.length) gsap.set(elements.img, { opacity: 0, y: 50 });
+
+      // Crear batch ScrollTrigger
+      ScrollTrigger.batch(
+        [".fadeInOut h3", ".fadeInOut h2", ".fadeInOut p", ".fadeInOut img.img"],
+        {
+          start: "top 80%",
+          end: "top 80%",
+          onEnter: (batch) =>
+            gsap.to(batch, {
+              opacity: 1,
+              y: 0,
+              x: 0,
+              stagger: stagger,
+              overwrite: true,
+              force3D: true,
+            }),
+          onLeave: (batch) =>
+            gsap.to(batch, {
+              opacity: 1,
+              y: 0,
+              x: 0,
+              stagger: stagger,
+              overwrite: true,
+              force3D: true,
+            }),
+          onEnterBack: (batch) =>
+            gsap.to(batch, {
+              opacity: 1,
+              y: 0,
+              x: 0,
+              stagger: stagger,
+              overwrite: true,
+              force3D: true,
+            }),
+          onLeaveBack: (batch) =>
+            gsap.to(batch, {
+              opacity: 0,
+              y: 50,
+              stagger: stagger,
+              overwrite: true,
+              force3D: true,
+            }),
+        }
+      );
+    });
   },
 
   // Método para scrollear a un elemento
@@ -158,9 +192,8 @@ export const AnimationManager = {
     if (!modal) return;
 
     gsap.to(modal, {
-      duration: 0.5,
+      duration: 0.3,
       opacity: open ? 1 : 0,
-      scale: open ? 1 : 0.9,
       onStart: () => {
         if (open) {
           modal.style.display = "flex";
@@ -219,11 +252,13 @@ export const AnimationManager = {
         scrub: true,
         force3D: true,
       },
-      scale: 0.9,
+      scale: 1.3,
+      opacity: 0,
       transformOrigin: "bottom center",
       duration: 1.5,
       ease: "power2.inOut",
     });
+    ScrollTrigger.refresh();
   },
 
   // Animación de texto SVG
@@ -262,6 +297,7 @@ export const AnimationManager = {
         duration: 1,
       });
     }
+    ScrollTrigger.refresh();
   },
 
 

@@ -34,6 +34,7 @@ const SplideTabs = ({ dataSplide }) => {
           perPage: 1,
           pagination: false,
           arrows: false,
+          type: 'fade',
         }}
       >
         <div

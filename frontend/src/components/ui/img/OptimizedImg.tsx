@@ -50,7 +50,7 @@ const OptimizedImage = ({
         className={`${className}`}
         src={desktopSrc} // Usamos la versión de desktop como respaldo
         alt={alt}
-        loading="lazy"
+        //loading="lazy"
         style={{ width: "100%", height: "auto" }}
       />
     </picture>

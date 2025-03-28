@@ -75,7 +75,6 @@ export const callModal = ({ open, className }) => {
   gsap.to(modal, {
     duration: 0.5,
     opacity: open ? 1 : 0,
-    scale: open ? 1 : 0.9,
     onStart: () => {
       if (open) {
         modal.style.display = "flex";
