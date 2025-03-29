@@ -29,7 +29,7 @@ const dataCompany: Company = await getDataCompany();
   keywords={dataPage.seo.keywords}
 >
   <Nav dataNav={dataPage} />
-  <ScrollSmootherProvider client:idle>
+  <ScrollSmootherProvider client:load>
     {
       dataPage.hero.setActive && (
         <section id={dataPage.hero.nameNav} class="hero">

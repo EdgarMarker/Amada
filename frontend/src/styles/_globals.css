@@ -340,6 +340,10 @@ ol:where([role="list"]) {
     }
 }
 
+.imgHide{
+    background-color: red;
+    opacity: 0;
+}
 /** BTNS*/
 .btn--down,
 .btn--right {

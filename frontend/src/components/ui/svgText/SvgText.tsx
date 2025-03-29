@@ -1,7 +1,10 @@
 import React, { useEffect, useRef } from "react";
 import OptimizedImage from "../img/OptimizedImg";
 import type { Img } from "../../../_types/_globals";
-import { AnimationManager, useGSAP} from "../../../_lib/gsap/animation-manager";
+import {
+  AnimationManager,
+  useGSAP,
+} from "../../../_lib/gsap/animation-manager";
 
 interface Props {
   dataImg: Img;
@@ -13,15 +16,21 @@ const SvgText = ({ dataImg, className }: Props) => {
   useGSAP(
     () => {
       if (wrapper.current) {
-        AnimationManager.animateSvgText(wrapper.current)
+        AnimationManager.animateSvgText(wrapper.current);
       }
     },
     { scope: wrapper }
   );
   return (
     <div ref={wrapper}>
-      <div className={`${className}`}>
+      <div
+        className={`${className}`}
+        style={{
+          background: `url(${dataImg.media.url}) center/contain no-repeat`,
+        }}
+      >
         <OptimizedImage
+          className="imgHide"
           src={dataImg.media.url}
           alt={dataImg.alt.altText}
           desktopWidth={1200}

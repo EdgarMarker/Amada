@@ -39,14 +39,14 @@ const Divisor = ({ dataMainImg, dataSvgText, dataWatermark }: Props) => {
       <div className="column__1">
         <div className="imageWatermarkBox imageWatermarkBox--top imgDivisor">
           <div className="watermark">{dataWatermark}</div>
-          <OptimizedImage
-            className="img"
-            src={dataMainImg.media.url}
-            alt={dataMainImg.alt.altText}
-            desktopWidth={1200}
-            tabletWidth={800}
-            mobileWidth={400}
-          />
+            <OptimizedImage
+              className="img"
+              src={dataMainImg.media.url}
+              alt={dataMainImg.alt.altText}
+              desktopWidth={1200}
+              tabletWidth={800}
+              mobileWidth={400}
+            />
         </div>
         {dataSvgText && (
           <SvgText className="svgTextBottom" dataImg={dataSvgText} />
