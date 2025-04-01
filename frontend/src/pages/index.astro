@@ -57,7 +57,7 @@ const dataCompany: Company = await getDataCompany();
                   fallbackFormat="jpeg"
                   inferSize={true}
                   quality={"high"}
-                  densities={[1.5, 2]}
+                  densities={[1.5,]}
                 />
               </div>
               
@@ -89,7 +89,7 @@ const dataCompany: Company = await getDataCompany();
             <PortableTextCustom
               id="brown"
               data={dataPage.hero.portableText}
-              client:idle
+              client:load
             />
 
             <div class="hero__imgSecondaryBox imageWatermarkBox" style={`background-image: url(${dataPage.hero.imgSecondary.media.url});`}>
@@ -97,7 +97,7 @@ const dataCompany: Company = await getDataCompany();
               <PortableTextCustom
               id="white"
               data={dataPage.hero.portableText}
-              client:idle
+              client:load
             />
             {/*<Picture
               class="img"
@@ -113,7 +113,7 @@ const dataCompany: Company = await getDataCompany();
           </div>
             
 
-          <ScrollTo classToScroll="intro" client:idle>
+          <ScrollTo classToScroll="intro" client:load>
             
             <Picture
               class="img hero__circleSvg rotate"
@@ -150,9 +150,9 @@ const dataCompany: Company = await getDataCompany();
               <div>
                 <PortableTextCustom
                   data={dataPage.intro.portableText}
-                  client:idle
+                  client:load
                 />
-                <OpenModalBtn openModalOf=".modal" client:only="react">
+                <OpenModalBtn openModalOf=".modal" client:load>
                   {dataPage.intro.btn2}
                 </OpenModalBtn>
                 <a
@@ -215,7 +215,7 @@ const dataCompany: Company = await getDataCompany();
             </ul>
           </div>
           <SvgText
-            client:idle
+            client:load
             className="svgTextBottom"
             dataImg={dataPage.intro.svgTextBottom}
           />
@@ -226,7 +226,7 @@ const dataCompany: Company = await getDataCompany();
       dataPage.location.setActive && (
         <section id={dataPage.location.nameNav} class="location">
           <SvgText
-            client:idle
+            client:load
             className="svgTextTop"
             dataImg={dataPage.location.svgTextTop}
           />
@@ -245,7 +245,7 @@ const dataCompany: Company = await getDataCompany();
             </div>
             <div class="col__right">
               <PortableTextCustom
-                client:idle
+                client:load
                 data={dataPage.location.portableTextIntro}
               />
               <div class="imageWatermarkBox">
@@ -267,7 +267,7 @@ const dataCompany: Company = await getDataCompany();
             <div class="col__left">
               <PortableTextCustom
                 data={dataPage.location.portableText}
-                client:idle
+                client:load
               />
               <a
                 href={`${dataPage.location.btnLink}`}
@@ -312,7 +312,7 @@ const dataCompany: Company = await getDataCompany();
     {
       dataPage.divisor1.setActive && (
         <Divisor
-          client:idle
+          client:load
           dataWatermark={dataCompany.watermark}
           dataMainImg={dataPage.divisor1.img}
           dataSvgText={dataPage.divisor1.svgTextBottom}
@@ -326,17 +326,17 @@ const dataCompany: Company = await getDataCompany();
           class="sustainability fadeInOut"
         >
           <SvgText
-            client:idle
+            client:load
             className="svgTextTop"
             dataImg={dataPage.sustainability.svgTextTop}
           />
           <div class="column__2">
             <div class="col__left">
               <PortableTextCustom
-                client:idle
+                client:load
                 data={dataPage.sustainability.portableText}
               />
-              <OpenModalBtn openModalOf=".modal" client:only="react">
+              <OpenModalBtn openModalOf=".modal" client:load>
                 {dataPage.sustainability.btn}
               </OpenModalBtn>
             </div>
@@ -359,10 +359,10 @@ const dataCompany: Company = await getDataCompany();
           <div class="column__1">
             <PortableTextCustom
               data={dataPage.sustainability.portableText2}
-              client:idle
+              client:load
             />
             <SplideSUS
-              client:idle
+              client:load
               dataSlide={dataPage.sustainability.list}
               dataWatermark={dataCompany.watermark}
             />
@@ -373,7 +373,7 @@ const dataCompany: Company = await getDataCompany();
     {
       dataPage.divisor2.setActive && (
         <Divisor
-          client:idle
+          client:load
           dataWatermark={dataCompany.watermark}
           dataMainImg={dataPage.divisor2.img}
           dataSvgText={dataPage.divisor2.svgTextBottom}
@@ -384,7 +384,7 @@ const dataCompany: Company = await getDataCompany();
       dataPage.amenities.setActive && (
         <section id={dataPage.amenities.nameNav} class="amenities fadeInOut">
           <SvgText
-            client:idle
+            client:load
             className="svgTextTop"
             dataImg={dataPage.amenities.svgTextTop}
           />
@@ -392,14 +392,14 @@ const dataCompany: Company = await getDataCompany();
             <div class="col__left">
               <PortableTextCustom
                 data={dataPage.amenities.portableText}
-                client:idle
+                client:load
               />
-              <OpenModalBtn openModalOf=".modal" client:idle>
+              <OpenModalBtn openModalOf=".modal" client:load>
                 {dataPage.amenities.btn}
               </OpenModalBtn>
             </div>
             <div class="col__right">
-              <SplideTabs client:idle dataSplide={dataPage.amenities.tabs} />
+              <SplideTabs client:load dataSplide={dataPage.amenities.tabs} />
             </div>
           </div>
           <div class="column__1">
@@ -410,7 +410,7 @@ const dataCompany: Company = await getDataCompany();
                     class="img"
                     src={amenity.img.media.url}
                     alt={amenity.img.alt.altText}
-                    formats={["webp", "avif", "svg"]}
+                    formats={["svg"]}
                     fallbackFormat="svg"
                     inferSize={true}
                     quality={"high"}
@@ -427,7 +427,7 @@ const dataCompany: Company = await getDataCompany();
     {
       dataPage.divisor3.setActive && (
         <Divisor
-          client:idle
+          client:load
           dataWatermark={dataCompany.watermark}
           dataMainImg={dataPage.divisor3.img}
         />
@@ -438,11 +438,11 @@ const dataCompany: Company = await getDataCompany();
         <section id={dataPage.gallery.nameNav} class="gallery fadeInOut">
           <div class="column__1">
             <PortableTextCustom
-              client:idle
+              client:load
               data={dataPage.gallery.portableText}
             />
             <LightBox
-              client:idle
+              client:load
               images={dataPage.gallery.list.map((img) => ({
                 src: img.media.url,
                 alt: img.alt.altText,
@@ -465,12 +465,12 @@ const dataCompany: Company = await getDataCompany();
                 ))}
               </ul>
             </LightBox>
-            <OpenModalBtn openModalOf=".modal" client:idle>
+            <OpenModalBtn openModalOf=".modal" client:load>
               {dataPage.gallery.btn}
             </OpenModalBtn>
           </div>
           <SvgText
-            client:idle
+            client:load
             className="svgTextBottom"
             dataImg={dataPage.gallery.svgTextBottom}
           />

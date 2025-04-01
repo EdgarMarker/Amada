@@ -6,7 +6,7 @@ const { script } = Astro.props;
 
 <div class="modal">
   <div class="modal__content">
-    <CloseModalBtn closeModalOf=".modal" client:only="react" />
-    <Form scriptData={script} client:visible />
+    <CloseModalBtn closeModalOf=".modal" client:load />
+    <Form scriptData={script} client:load />
   </div>
 </div>

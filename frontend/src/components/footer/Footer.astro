@@ -18,7 +18,7 @@ const { script } = Astro.props;
     <div class="col__left">
       <PortableTextCustom
       data={dataCompany.contact.portableText}
-      client:only="react"
+      client:load
       />
       <div class="bloque__contacto">
         <h3>Teléfono:</h3>

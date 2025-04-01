@@ -33,7 +33,7 @@ const dataCompany: Company = await getDataCompany();
   keywords={dataPage.seo.keywords}
 >
   <Nav dataNav={dataPage} />
-  <ScrollSmootherProvider client:only="react">
+  <ScrollSmootherProvider client:load>
     {
       dataPage.hero.setActive && (
         <section id={dataPage.hero.nameNav} class="hero">
@@ -44,7 +44,7 @@ const dataCompany: Company = await getDataCompany();
               <ScrollTo
                 btnText={`${dataPage.hero.btn}`}
                 classToScroll="intro"
-                client:only="react"
+                client:load
               />
             </did>
             <did class="col__right">
@@ -70,7 +70,7 @@ const dataCompany: Company = await getDataCompany();
             <did class="col__left">
               <PortableTextCustom
                 data={dataPage.intro.portableText}
-                client:only="react"
+                client:load
               />
               <div class="btn">{dataPage.intro.btn}</div>
             </did>
@@ -115,7 +115,7 @@ const dataCompany: Company = await getDataCompany();
             <div class="col__left">
               <PortableTextCustom
                 data={dataPage.location.portableText}
-                client:only="react"
+                client:load
               />
               <a
                 href={`${dataPage.location.btnLink}`}
@@ -159,7 +159,7 @@ const dataCompany: Company = await getDataCompany();
           <div class="column__1">
             <PortableTextCustom
               data={dataPage.amenities.portableText}
-              client:only="react"
+              client:load
             />
             <ul class="listado__x5" role="list">
               {dataPage.amenities.list.map((amenity) => (
@@ -206,7 +206,7 @@ const dataCompany: Company = await getDataCompany();
           <div class="column__1">
             <PortableTextCustom
               data={dataPage.models.portableText}
-              client:only="react"
+              client:load
             />
           </div>
           <TabsModels dataPage={dataPage} />
@@ -219,7 +219,7 @@ const dataCompany: Company = await getDataCompany();
           <div class="column__1">
             <PortableTextCustom
               data={dataPage.testy.portableText}
-              client:only="react"
+              client:load
             />
             <div
               id="splide-testy"
@@ -260,10 +260,10 @@ const dataCompany: Company = await getDataCompany();
           <div class="column__1">
             <PortableTextCustom
               data={dataPage.gallery.portableText}
-              client:only="react"
+              client:load
             />
             <LightBox
-              client:only="react"
+              client:load
               images={dataPage.gallery.list.map((img) => ({
                 src: img.media.url,
                 alt: img.alt.altText,

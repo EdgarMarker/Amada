@@ -1,5 +1,8 @@
 import React from "react";
-import { scrollTo, useGSAP } from "../../../_lib/gsap/base";
+import {
+  AnimationManager,
+  useGSAP,
+} from "../../../_lib/gsap/animation-manager";
 
 interface Props {
   children?: React.ReactNode;
@@ -15,7 +18,7 @@ const ScrollTo = ({
 }: Props) => {
   const { contextSafe } = useGSAP();
   const handleScrollTo = contextSafe(() => {
-    scrollTo({ idToScroll, classToScroll });
+    AnimationManager.scrollTo({ idToScroll, classToScroll });
   });
   return (
     <div className={`btn ${className}`} onClick={() => handleScrollTo()}>

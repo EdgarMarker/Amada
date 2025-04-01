@@ -52,7 +52,7 @@ const sortedNavItems = navItems.sort((a, b) => a.id - b.id);
                 <ScrollTo
                   className="btn__nav"
                   idToScroll={item.name}
-                  client:only="react"
+                  client:load
                 >
                   {item.name}
                 </ScrollTo>
@@ -64,7 +64,7 @@ const sortedNavItems = navItems.sort((a, b) => a.id - b.id);
         <ScrollTo
           className="btn__nav"
           classToScroll="footer"
-          client:only="react"
+          client:load
         >
           contacto
         </ScrollTo>
@@ -85,7 +85,7 @@ const sortedNavItems = navItems.sort((a, b) => a.id - b.id);
           densities={[1.5, 2]}
         />
       </a>
-      <OpenNav client:only="react" />
+      <OpenNav client:load />
     </div>
   </nav>
   <nav class="mobileActive">
@@ -112,7 +112,7 @@ const sortedNavItems = navItems.sort((a, b) => a.id - b.id);
                 <ScrollTo
                   className="btn__nav"
                   idToScroll={item.name}
-                  client:only="react"
+                  client:load
                 >
                   {item.name}
                 </ScrollTo>
@@ -124,9 +124,9 @@ const sortedNavItems = navItems.sort((a, b) => a.id - b.id);
         <ScrollTo
           className="btn__nav"
           classToScroll="footer"
-          client:only="react"
+          client:load
         >
-          contact
+          contacto
         </ScrollTo>
       </li>
     </ul>

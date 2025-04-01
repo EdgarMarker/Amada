@@ -4,26 +4,22 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { ScrollSmoother } from "gsap/ScrollSmoother";
 import ScrollToPlugin from "gsap/ScrollToPlugin";
 import { useGSAP } from "@gsap/react";
-
-
+import { CLASS_PAGINATION } from "@splidejs/splide";
 
 // Registrar plugins
 gsap.registerPlugin(ScrollTrigger, ScrollToPlugin, ScrollSmoother, useGSAP);
 
-
-
 //Exportar useGSAP
 
-export { useGSAP };
+export { useGSAP, ScrollTrigger, gsap, ScrollSmoother };
 
 // Objeto central para gestionar animaciones
 export const AnimationManager = {
   // Almacena animaciones registradas
   animations: {},
 
-  
   // Frase baja
-  initFrase(){
+  initFrase() {
     let frases = gsap.utils.toArray(["#brown", "#white"]);
     gsap.to(frases, {
       y: "-35%",
@@ -32,12 +28,12 @@ export const AnimationManager = {
         start: "20% bottom",
         end: "bottom top",
         scrub: true,
-      }
-    })
+      },
+    });
   },
 
   // Frase baja
-  initFrase(){
+  initFrase() {
     let frases = gsap.utils.toArray(["#brown", "#white"]);
     gsap.to(frases, {
       y: "-35%",
@@ -46,12 +42,12 @@ export const AnimationManager = {
         start: "20% bottom",
         end: "bottom top",
         scrub: true,
-      }
-    })
+      },
+    });
   },
 
   // Frase baja
-  initHeroFrase(){
+  initHeroFrase() {
     gsap.to(".hero__svgAndH1Box div", {
       scale: 1.3,
       opacity: 0,
@@ -63,10 +59,9 @@ export const AnimationManager = {
         start: "top bottom",
         end: "bottom bottom",
         scrub: true,
-      }
+      },
     });
   },
-  
 
   // Inicializa solo ScrollSmoother
   initScrollSmoother() {
@@ -85,7 +80,6 @@ export const AnimationManager = {
     });
   },
 
-
   // Inicializa animaciones batch para elementos con clases específicas
   initBatchAnimations() {
     const stagger = 0.1;
@@ -93,7 +87,6 @@ export const AnimationManager = {
     if (typeof window === "undefined") return;
 
     requestAnimationFrame(() => {
-
       // Seleccionar elementos para animaciones
       const elements = {
         h2: document.querySelectorAll(".fadeInOut h2"),
@@ -110,7 +103,12 @@ export const AnimationManager = {
 
       // Crear batch ScrollTrigger
       ScrollTrigger.batch(
-        [".fadeInOut h3", ".fadeInOut h2", ".fadeInOut p", ".fadeInOut img.img"],
+        [
+          ".fadeInOut h3",
+          ".fadeInOut h2",
+          ".fadeInOut p",
+          ".fadeInOut img.img",
+        ],
         {
           start: "top 80%",
           end: "top 80%",
@@ -157,7 +155,6 @@ export const AnimationManager = {
   // Método para scrollear a un elemento
   scrollTo({ idToScroll, classToScroll, duration = 1 }) {
     let selector = idToScroll ? `#${idToScroll}` : `.${classToScroll}`;
-
     gsap.to(window, {
       duration,
       scrollTo: selector,
@@ -211,29 +208,31 @@ export const AnimationManager = {
 
   // Animación de cabecera
   animateHeader() {
+    const isDesktop = window.matchMedia("(min-width: 1024px)").matches;
     const header = document.getElementById("header");
     const intro = document.querySelector(".intro");
 
-    
-    ScrollTrigger.create({
+    if (isDesktop) {
+      ScrollTrigger.create({
         trigger: intro,
         endTrigger: "footer",
         start: "top bottom",
         end: "bottom top",
         ease: "power.in",
         onEnter: () => {
-          gsap.to(header, {y: 70});
+          gsap.to(header, { y: 70 });
         },
         onLeave: () => {
-          gsap.to(header, {y: 0});
+          gsap.to(header, { y: 0 });
         },
         onEnterBack: () => {
-          gsap.to(header, {y: 70});
+          gsap.to(header, { y: 70 });
         },
         onLeaveBack: () => {
-          gsap.to(header, {y: 0});
+          gsap.to(header, { y: 0 });
         },
-    });
+      });
+    }
   },
 
   // Animación de escala para divisores
@@ -299,9 +298,6 @@ export const AnimationManager = {
     }
     ScrollTrigger.refresh();
   },
-
-
-  
 
   // Animación de héroe
   animateHero() {

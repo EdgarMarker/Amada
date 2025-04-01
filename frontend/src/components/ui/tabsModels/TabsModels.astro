@@ -38,17 +38,17 @@ const data: Page = dataPage;
                 <h3>{model.name}</h3>
                 <PortableTextCustom
                   data={model.techSheet1}
-                  client:only="react"
+                  client:load
                 />
                 <hr />
                 <PortableTextCustom
                   data={model.techSheet2}
-                  client:only="react"
+                  client:load
                 />
                 <hr />
                 <PortableTextCustom
                   data={model.techSheet3}
-                  client:only="react"
+                  client:load
                 />
               </div>
               <div class="col__right">
