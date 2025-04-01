@@ -42,14 +42,13 @@ npm run dev
 
 ## ⚠️ Notas importantes
 
-### No usar --force o --legacy-peer-deps para resolver conflictos de dependencias
-### Para problemas con Sanity/Astro, actualiza las dependencias dentro de (Frontend):
+#### No usar --force o --legacy-peer-deps para resolver conflictos de dependencias
+#### Para problemas con Sanity/Astro, actualiza las dependencias dentro de (Frontend):
 ```bash
 npm update astro @sanity/astro
 ```
-### Asegúrate que el archivo .env esté en .gitignore
+#### Asegúrate que el archivo .env esté en .gitignore
 
 ## 🆘 Soporte
-## Para problemas técnicos, contactar a:
-·Edgar Mendez - Equipo de desarrollo Marker branding
-·Email: emendez.marker@gmail.com
+#### Para problemas técnicos, contactar a:
+·Edgar Mendez - emendez.marker@gmail.com | Equipo de desarrollo Marker branding
