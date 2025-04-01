@@ -1,21 +1,55 @@
-# Proceso de instalación Amada
+# 🚀 Proyecto Amada - Guía de Instalación
 
+## 📋 Requisitos previos
+- Node.js v20+ (recomendado LTS)
+- npm v9+
+- Git instalado
 
-## Intalación y clonado del proyecto
+## 🛠 Instalación
 
-1.- Ejecute en la carpeta donde quiere guardar la carpeta del proyecto Amada:
-`git clone https://github.com/EdgarMarker/Amada.git`
-2.- Instale las variables de entorno moviendonos a la carpeta "frontend" desde la terminal:
-`cd frontend/`
-`git clone [URL_GIST] .env_secrets && cp .env_secrets/Amada.txt .env && rm -rf .env_secrets`
-3.- Instalar las dependencias de node_modules:
-    ·Desde la carpeta carpeta actual "frontend" ejecutamos:
-    `npm i`
-    ·Luego nos pasamos al backend y instalamos las dependencias:
-    `cd ..`
-    `cd backend`
-    `npm i`
-4.- Instalación completa! 👌🏽
+### 1. Clonar el repositorio
+```bash
+git clone https://github.com/EdgarMarker/Amada.git
+cd Amada
+```
+### 2. Configurar variables de entorno (Frontend)
+```bash
+cd frontend
+git clone [URL_GIST_PRIVADO] .env_secrets && cp .env_secrets/Amada.txt .env && rm -rf .env_secrets
+```
+### 3. Instalar dependencias
+#### Frontend
+```bash
+npm install
+```
+#### Backend
+```bash
+cd ../backend
+npm install
+```
 
-NOTA: En caso de tener problemas con las dependencias, evitemos forzar la instalación con `npm i --force` o `npm i --legacy-per-dephs` y actualizemos astro con sanity/astro
+## ▶️ Ejecución del proyecto
 
+### 1. Iniciar backend (desde /backend):
+```bash
+npm run dev
+```
+### 2. Iniciar frontend (desde /frontend):
+```bash
+cd ../frontend
+npm run dev
+```
+
+## ⚠️ Notas importantes
+
+### No usar --force o --legacy-peer-deps para resolver conflictos de dependencias
+### Para problemas con Sanity/Astro, actualiza las dependencias dentro de (Frontend):
+```bash
+npm update astro @sanity/astro
+```
+### Asegúrate que el archivo .env esté en .gitignore
+
+## 🆘 Soporte
+## Para problemas técnicos, contactar a:
+·Edgar Mendez - Equipo de desarrollo Marker branding
+·Email: emendez.marker@gmail.com
