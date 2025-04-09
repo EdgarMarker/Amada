@@ -1,33 +1,34 @@
----
-import "../../styles/page.css";
-import "@splidejs/react-splide/css";
-import { getDataPage, getDataPageBySlug } from "../../_data/page";
-import type { Page } from "../../_types/page";
-import Layout from "../../layouts/Layout.astro";
-import ScrollSmootherProvider from "../../_lib/gsap/ScrollSmootherProvider";
-import Nav from "../../components/nav/Nav";
-import PortableTextCustom from "../../components/ui/portableText/PortableTextCustom";
-import { Picture } from "astro:assets";
-import LightBox from "../../components/ui/lightbox/LightBox";
-import Footer from "../../components/footer/Footer.astro";
-import type { Company } from "../../_types/company";
-import { getDataCompany } from "../../_data/company";
-import TabsModels from "../../components/ui/tabsModels/TabsModels.astro";
-import ScrollTo from "../../components/ui/btn/ScrollTo";
-
-export const getStaticPaths = async () => {
-  const dataPage = await getDataPage();
-  return dataPage.map((page: Page) => ({
-    params: { slug: page.slug.current },
-  }));
-};
-
-const { slug } = Astro.params;
-const dataPage: Page = await getDataPageBySlug(slug);
-const dataCompany: Company = await getDataCompany();
----
-
-<Layout
+<!--  
+  ---
+  import "../../styles/page.css";
+  import "@splidejs/react-splide/css";
+  import { getDataPage, getDataPageBySlug } from "../../_data/page";
+  import type { Page } from "../../_types/page";
+  import Layout from "../../layouts/Layout.astro";
+  import ScrollSmootherProvider from "../../_lib/gsap/ScrollSmootherProvider";
+  import Nav from "../../components/nav/Nav";
+  import PortableTextCustom from "../../components/ui/portableText/PortableTextCustom";
+  import { Picture } from "astro:assets";
+  import LightBox from "../../components/ui/lightbox/LightBox";
+  import Footer from "../../components/footer/Footer.astro";
+  import type { Company } from "../../_types/company";
+  import { getDataCompany } from "../../_data/company";
+  import TabsModels from "../../components/ui/tabsModels/TabsModels.astro";
+  import ScrollTo from "../../components/ui/btn/ScrollTo";
+  
+  export const getStaticPaths = async () => {
+    const dataPage = await getDataPage();
+    return dataPage.map((page: Page) => ({
+      params: { slug: page.slug.current },
+    }));
+  };
+  
+  const { slug } = Astro.params;
+  const dataPage: Page = await getDataPageBySlug(slug);
+  const dataCompany: Company = await getDataCompany();
+  ---
+  
+  <Layout
   title={dataPage.seo.title}
   desc={dataPage.seo.dsc}
   keywords={dataPage.seo.keywords}
@@ -321,3 +322,4 @@ const dataCompany: Company = await getDataCompany();
     document.head.appendChild(style);
   });
 </script>
+-->
