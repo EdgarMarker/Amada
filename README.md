@@ -15,7 +15,7 @@ cd Amada
 ### 2. Configurar variables de entorno (Frontend)
 ```bash
 cd frontend
-git clone [URL_GIST_PRIVADO] .env_secrets && cp .env_secrets/Amada.txt .env && rm -rf .env_secrets
+git clone [SECRET_GIST_URL] .env_secrets && touch .env && cp .env_secrets/Amada.txt .env && rm -rf .env_secrets
 ```
 ### 3. Instalar dependencias
 #### Frontend

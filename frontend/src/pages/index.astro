@@ -6,7 +6,6 @@ import { getDataPageMain } from "../_data/page";
 import ScrollSmootherProvider from "../_lib/gsap/ScrollSmootherProvider";
 import type { Company } from "../_types/company";
 import type { Page } from "../_types/page";
-import Nav from "../components/nav/Nav.astro";
 import Layout from "../layouts/Layout.astro";
 import PortableTextCustom from "../components/ui/portableText/PortableTextCustom";
 import LightBox from "../components/ui/lightbox/LightBox";
@@ -18,6 +17,8 @@ import Divisor from "../components/divisor/Divisor";
 import SvgText from "../components/ui/svgText/SvgText";
 import SplideSUS from "../components/ui/splide/SplideSUS";
 import SplideTabs from "../components/ui/splide/SplideTabs";
+import Masterplan from "../components/masterplan/Masterplan";
+import Nav from "../components/nav/Nav.tsx";
 
 const dataPage: Page = await getDataPageMain();
 const dataCompany: Company = await getDataCompany();
@@ -28,8 +29,8 @@ const dataCompany: Company = await getDataCompany();
   desc={dataPage.seo.dsc}
   keywords={dataPage.seo.keywords}
 >
-  <Nav dataNav={dataPage} />
-  <ScrollSmootherProvider client:load>
+<Nav dataPage={dataPage} dataCompany={dataCompany} client:load/>
+<ScrollSmootherProvider client:load>
     {
       dataPage.hero.setActive && (
         <section id={dataPage.hero.nameNav} class="hero">
@@ -281,6 +282,7 @@ const dataCompany: Company = await getDataCompany();
               <Picture
                 class="img"
                 src={dataPage.location.img.media.url}
+                
                 alt={dataPage.location.img.alt.altText}
                 formats={["svg", "webp", "avif"]}
                 fallbackFormat="jpeg"
@@ -434,6 +436,58 @@ const dataCompany: Company = await getDataCompany();
       )
     }
     {
+      dataPage.masterplan.setActive && (
+        <section id={dataPage.masterplan.nameNav} class="masterplan fadeInOut">
+          <SvgText
+            client:load
+            className="svgTextBottom"
+            dataImg={dataPage.masterplan.svgTextBottom}
+          />
+          <div class="column__2">
+            <div class="col__left">
+              <PortableTextCustom
+                data={dataPage.masterplan.portableText}
+                client:load
+              />
+              <div class="masterplan__statusPanel">
+                <div class="head">
+                  <div>
+                    <h3>12</h3>
+                    <p>hectáreas</p>
+                  </div>
+                  <div>
+                    <h3>186</h3>
+                    <p>lotes</p>
+                  </div>
+                </div>
+                <ul class="statusBody" role="list">
+                  <li><p>Disponibilidad:</p></li>
+                  {
+                    [{name: "Disponible", color: "var(--color-success)"}, 
+                    {name: "Apartado", color: "var(--color-warning)"},
+                    {name: "Vendido", color: "var(--color-error)"}
+                  ].map((status) => (
+                    <li>
+                      <div class="color" style={`background-color: ${status.color}; width: 60px; height: 30px `}></div>
+                      <p>{status.name}</p>
+                    </li>
+                  ))
+
+                  }
+                </ul>
+              </div>
+              <OpenModalBtn openModalOf=".modal" client:load>
+                {dataPage.masterplan.btn}
+              </OpenModalBtn>
+            </div>
+            <div class="col__right">
+
+            </div>
+          </div>
+        </section>
+      )
+    }
+    {
       dataPage.gallery.setActive && (
         <section id={dataPage.gallery.nameNav} class="gallery fadeInOut">
           <div class="column__1">
@@ -477,6 +531,8 @@ const dataCompany: Company = await getDataCompany();
         </section>
       )
     }
+    <Masterplan 
+    client:load/>
     <Footer script={dataPage.form.script} />
   </ScrollSmootherProvider>
   <FormModal script={dataPage.form.script} />

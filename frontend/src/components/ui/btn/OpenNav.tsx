@@ -1,11 +1,13 @@
 import React, { useRef } from "react";
-import { callMenu, useGSAP } from "../../../_lib/gsap/base";
+import { AnimationManager, useGSAP } from "../../../_lib/gsap/animation-manager";
 
 const OpenNav = () => {
   const ref = useRef(null);
   const { contextSafe } = useGSAP({ scope: ref });
   const handleModal = contextSafe(() => {
-    callMenu({ open: true });
+    if (ref.current) {
+      AnimationManager.toggleMenu({open: true});
+    }
   });
   return (
     <div className="btn" ref={ref} onClick={() => handleModal()}>

@@ -16,12 +16,32 @@ const ScrollTo = ({
   classToScroll,
   children,
 }: Props) => {
-  const { contextSafe } = useGSAP();
+  const ref = React.useRef(null);
+  const { contextSafe } = useGSAP({scope: ref});
+
   const handleScrollTo = contextSafe(() => {
-    AnimationManager.scrollTo({ idToScroll, classToScroll });
+    if(!ref.current) return;
+
+    const isDesktop = window.matchMedia("(min-width: 1024px)").matches;
+    if (isDesktop) {
+      AnimationManager.scrollTo({ idToScroll, classToScroll });
+      return;
+    }
+  
+    const selector = idToScroll ? `#${idToScroll}` : `.${classToScroll}`;
+    const element = document.querySelector(selector)
+    element?.scrollIntoView({
+      behavior: "smooth",
+      block: "start"
+    });
+    
   });
   return (
-    <div className={`btn ${className}`} onClick={() => handleScrollTo()}>
+    <div
+      className={`btn ${className}`}
+      ref={ref}
+      onClick={() => handleScrollTo()}
+    >
       {children}
     </div>
   );

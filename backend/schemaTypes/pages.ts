@@ -42,6 +42,10 @@ export default defineType({
       title: 'Tercer Divisor',
     },
     {
+      name: 'masterplan',
+      title: 'Masterplan',
+    },
+    {
       name: 'gallery',
       title: 'Galería',
     },
@@ -562,6 +566,51 @@ export default defineType({
           name: 'img',
           title: 'Imagen',
           type: 'image',
+        },
+      ],
+    }),
+    defineField({
+      name: 'masterplan',
+      title: 'Masterplan',
+      group: 'masterplan',
+      type: 'object',
+      fields: [
+        {
+          name: 'id',
+          type: 'number',
+          initialValue: 8,
+        },
+        {
+          name: 'setActive',
+          title: 'Activar si quiere que se muestre esta sección',
+          type: 'boolean',
+        },
+        {
+          name: 'setNav',
+          title: 'Activar si quiere que se muestre en la barra navegación',
+          type: 'boolean',
+        },
+        {
+          name: 'nameNav',
+          title: 'Nombre de la navegación',
+          type: 'string',
+          hidden: ({parent}) => !parent?.setNav,
+        },
+        {
+          name: 'svgTextBottom',
+          title: 'Texto llamativo en SVG',
+          type: 'image',
+        },
+        {
+          name: 'portableText',
+          title: 'Contenido de Masterplan',
+          type: 'array',
+          of: [{type: 'block'}],
+        },
+        {
+          name: 'btn',
+          title: 'Texto de botón de llamada a la acción',
+          type: 'string',   
         },
       ],
     }),

@@ -4,6 +4,7 @@ import {visionTool} from '@sanity/vision'
 import {schemaTypes} from './schemaTypes'
 import {colorInput} from '@sanity/color-input'
 import {media} from 'sanity-plugin-media'
+import ImportCSVBtn from './components/ImportCSVBtn'
 
 export default defineConfig({
   name: 'default',
@@ -44,11 +45,41 @@ export default defineConfig({
                 .title('Modelos')
                 .filter('_type == "models"'),
             ),
+            S.listItem()
+              .title('CSV')
+              .child(
+                S.document().schemaType('csvUpload').documentId('csvUpload').title('Subir CSV'),
+              ),
+
+            //Lista de lotes (permite crear copias)
+            S.listItem().title('Lotes').child(
+              S.documentTypeList('lote') // Tipo de documento: lotes
+                .title('Lotes')
+                .filter('_type == "lote"'),
+            ),
           ]),
     }),
     visionTool(),
     colorInput(),
     media(),
+    {
+      name: 'csv-importer',
+      document: {
+        // Modificado para ser más explícito y depurable
+        actions: (prev, context) => {
+          console.log('Configurando acciones de documento');
+          console.log('Tipo de documento:', context.schemaType);
+          
+          // Explícitamente verificamos el tipo de esquema
+          if (context.schemaType === 'csvUpload') {
+            console.log('Agregando acción de importación CSV para csvImport');
+            return [...prev, ImportCSVBtn];
+          }
+          
+          return prev;
+        }
+      }
+    },
   ],
 
   schema: {

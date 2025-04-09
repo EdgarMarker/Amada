@@ -21,6 +21,7 @@ export interface Page {
   models: Models;
   testy: Testy;
   divisor3: Divisor;
+  masterplan: Masterplan;
   gallery: Gallery;
   form: Form;
 }
@@ -140,6 +141,17 @@ interface Testy {
     img: Img;
     text: string;
   }[];
+}
+
+interface Masterplan {
+  id: number;
+  setActive: boolean;
+  setNav: boolean;
+  nameNav: string;
+  idNav: string;
+  portableText: BlockContent[];
+  btn?: string;
+  svgTextBottom: Img;
 }
 
 interface Gallery {

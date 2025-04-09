@@ -336,6 +336,23 @@ const MODEL__PAGE = `
       }
     },
   },
+  masterplan{
+    id,
+    setActive,
+    setNav,
+    nameNav,
+    idNav,
+    portableText,
+    btn,
+    svgTextBottom{
+      "media": asset->{
+        url
+      },
+      "alt": asset->{
+        altText
+      }
+    }
+  },
   gallery{
     id,
     setActive,

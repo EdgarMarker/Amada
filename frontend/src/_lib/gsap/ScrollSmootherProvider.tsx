@@ -1,5 +1,5 @@
 import React, { useRef } from "react";
-import { ScrollSmoother, gsap, useGSAP } from "./animation-manager";
+import { AnimationManager, ScrollSmoother, useGSAP } from "./animation-manager";
 
 interface Props {
   children: React.ReactNode;
@@ -9,19 +9,26 @@ const ScrollSmootherProvider = ({ children }: Props) => {
   const wrapper = useRef(null);
   const content = useRef(null);
 
-  useGSAP(() => {
-    gsap.registerPlugin(ScrollSmoother);
-
-    // Crear ScrollSmoother solo en desktop
-    const isDesktop = window.matchMedia("(min-width: 1024px)").matches;
-    const smoothValue = isDesktop ? 1 : 0.01;
-    ScrollSmoother.create({
-      wrapper: wrapper.current,
-      content: content.current,
-      smooth: smoothValue,
-      effects: true,
-    });
-  }, []);
+  useGSAP(
+    () => {
+      const isDesktop = window.matchMedia("(min-width: 1024px)").matches;
+      if (isDesktop) {
+        ScrollSmoother.create({
+          wrapper: wrapper.current,
+          content: content.current,
+          smooth: 1,
+          effects: true,
+          ignoreMobileResize: true,
+          normalizeScroll: false,
+        });
+      }
+      AnimationManager.animateHeader();
+      AnimationManager.initBatchAnimations();
+      AnimationManager.initFrase();
+      AnimationManager.animateDivisor();
+    },
+    { scope: wrapper }
+  );
 
   return (
     <div ref={wrapper} className="smooth-wrapper">

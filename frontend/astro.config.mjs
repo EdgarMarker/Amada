@@ -30,11 +30,12 @@ export default defineConfig({
         'gsap/ScrollTrigger',
         'gsap/ScrollToPlugin',
         'gsap/ScrollSmoother',
+        '@gsap/react',
         '@splidejs/react-splide'
       ]
     },
     ssr: {
-      noExternal: ['gsap', '@splidejs/react-splide']
+      noExternal: ['gsap', '@splidejs/react-splide', '@gsap/react']
     }
   }
 });

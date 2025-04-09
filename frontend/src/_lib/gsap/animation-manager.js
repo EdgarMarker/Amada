@@ -4,20 +4,21 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { ScrollSmoother } from "gsap/ScrollSmoother";
 import ScrollToPlugin from "gsap/ScrollToPlugin";
 import { useGSAP } from "@gsap/react";
-import { CLASS_PAGINATION } from "@splidejs/splide";
 
 // Registrar plugins
-gsap.registerPlugin(ScrollTrigger, ScrollToPlugin, ScrollSmoother, useGSAP);
-
+gsap.registerPlugin(
+  ScrollTrigger,
+  ScrollToPlugin,
+  ScrollSmoother,
+  useGSAP,
+  gsap
+);
 //Exportar useGSAP
 
-export { useGSAP, ScrollTrigger, gsap, ScrollSmoother };
+export { ScrollTrigger, ScrollToPlugin, gsap, ScrollSmoother, useGSAP };
 
 // Objeto central para gestionar animaciones
 export const AnimationManager = {
-  // Almacena animaciones registradas
-  animations: {},
-
   // Frase baja
   initFrase() {
     let frases = gsap.utils.toArray(["#brown", "#white"]);
@@ -60,23 +61,6 @@ export const AnimationManager = {
         end: "bottom bottom",
         scrub: true,
       },
-    });
-  },
-
-  // Inicializa solo ScrollSmoother
-  initScrollSmoother() {
-    if (this.smoother) return; // Evitar múltiples inicializaciones
-
-    let mm = gsap.matchMedia();
-    mm.add("(min-width: 1024px)", () => {
-      this.smoother = ScrollSmoother.create({
-        smooth: 1,
-        effects: true,
-        smoothTouch: 0.1,
-        onUpdate: () => {
-          document.dispatchEvent(new CustomEvent("smoother-update"));
-        },
-      });
     });
   },
 
@@ -154,26 +138,28 @@ export const AnimationManager = {
 
   // Método para scrollear a un elemento
   scrollTo({ idToScroll, classToScroll, duration = 1 }) {
-    let selector = idToScroll ? `#${idToScroll}` : `.${classToScroll}`;
-    gsap.to(window, {
-      duration,
-      scrollTo: selector,
-      ease: "power2.inOut",
+    if (typeof window === "undefined") return;
+
+    requestAnimationFrame(() => {
+      const selector = idToScroll ? `#${idToScroll}` : `.${classToScroll}`;
+      gsap.to(window, {
+        duration,
+        scrollTo: selector,
+        ease: "power2.inOut",
+      });
     });
+    ScrollTrigger.refresh();
   },
 
   // Método para mostrar/ocultar menú móvil
   toggleMenu({ open }) {
     const navActive = document.querySelector("nav.mobileActive");
     const navBase = document.querySelector("nav.mobile");
-
     if (!navActive || !navBase) return;
 
     const tl = gsap.timeline();
     tl.to(navBase, {
-      display: open ? "none" : "flex",
-      top: open ? "-100%" : "0%",
-      duration: 1,
+      duration: 0.25,
     });
     tl.to(navActive, {
       display: open ? "flex" : "none",
@@ -209,10 +195,11 @@ export const AnimationManager = {
   // Animación de cabecera
   animateHeader() {
     const isDesktop = window.matchMedia("(min-width: 1024px)").matches;
+    if (typeof window === "undefined") return
+    if (!isDesktop) return;
+
     const header = document.getElementById("header");
     const intro = document.querySelector(".intro");
-
-    if (isDesktop) {
       ScrollTrigger.create({
         trigger: intro,
         endTrigger: "footer",
@@ -232,7 +219,7 @@ export const AnimationManager = {
           gsap.to(header, { y: 0 });
         },
       });
-    }
+      ScrollTrigger.refresh();
   },
 
   // Animación de escala para divisores
@@ -257,7 +244,6 @@ export const AnimationManager = {
       duration: 1.5,
       ease: "power2.inOut",
     });
-    ScrollTrigger.refresh();
   },
 
   // Animación de texto SVG
@@ -326,19 +312,5 @@ export const AnimationManager = {
         });
       },
     });
-  },
-
-  // Refrescar todas las animaciones
-  refresh() {
-    // Refrescar ScrollTrigger
-    ScrollTrigger.refresh(true);
-
-    // Reinicializar si es necesario
-    this.initBatchAnimations();
-
-    // Refrescar ScrollSmoother si existe
-    if (this.smoother) {
-      this.smoother.refresh();
-    }
   },
 };
